@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SOA_lab6_library.iml" filepath="$PROJECT_DIR$/SOA_lab6_library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-ear/library-ear.iml" filepath="$PROJECT_DIR$/library-ear/library-ear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-ejb/library-ejb.iml" filepath="$PROJECT_DIR$/library-ejb/library-ejb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-web/library-web.iml" filepath="$PROJECT_DIR$/library-web/library-web.iml" />
+    </modules>
+  </component>
+</project>
