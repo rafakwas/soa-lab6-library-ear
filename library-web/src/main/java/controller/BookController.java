@@ -1,19 +1,13 @@
 package controller;
 
-import data.BookRepository;
 import data.BookRepositoryRemote;
 import model.Book;
 import model.Pair;
-import service.EntityManager;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.inject.Model;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,9 +15,6 @@ import java.util.List;
 @RequestScoped
 @Named("bookcontroller")
 public class BookController {
-
-    @EJB
-    EntityManager entityManager;
 
     @EJB
     BookRepositoryRemote bookRepositoryRemote;
@@ -47,10 +38,14 @@ public class BookController {
         book.setReserved(false);
         System.out.println("Książka dodana");
         System.out.println(book);
-        entityManager.persist(book);
+        bookRepositoryRemote.persist(book);
     }
 
     public List<Book> getBooks() {
         return bookRepositoryRemote.getAllBooks();
+    }
+
+    public void reserveBook(Book book) {
+        bookRepositoryRemote.reserve(book);
     }
 }

@@ -1,21 +1,10 @@
 package data;
 
 import model.Book;
-import model.Bookstore;
-import service.EntityManager;
 import utils.IOUtils;
 
 import javax.ejb.*;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-
-import static javax.ejb.LockType.READ;
 
 @Singleton
 @Startup
@@ -34,7 +23,23 @@ public class BookRepository implements BookRepositoryRemote {
         return getAllBooks();
     }
 
+    @Override
+    public void rent(Book book) {
 
+    }
 
+    @Override
+    public void reserve(Book book) {
+        IOUtils.modifyReservation(book);
+    }
 
+    @Override
+    public void returning(Book book) {
+
+    }
+
+    @Override
+    public void persist(Book book) {
+        IOUtils.addBook(book);
+    }
 }

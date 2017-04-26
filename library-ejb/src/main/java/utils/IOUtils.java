@@ -43,6 +43,16 @@ public class IOUtils {
         return bookstore;
     }
 
+    public static void modifyReservation(Book book) {
+        Bookstore bookstore = getBookstore();
+        List<Book> bookList = bookstore.getBookList();
+        bookList.remove(book);
+        if (book.isReserved()) book.setReserved(false); else book.setReserved(false);
+        bookList.add(book);
+        bookstore.setBookList(bookList);
+        write(BOOKSTORE_PATH,bookstore);
+    }
+
     private static void write(final String BOOKSTORE_PATH,final Bookstore bookstore) {
 
         JAXBContext jc = null;
