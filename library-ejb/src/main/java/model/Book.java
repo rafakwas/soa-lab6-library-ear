@@ -7,14 +7,24 @@ import java.util.List;
 
 
 @XmlRootElement(name = "book")
-@XmlType(propOrder = { "authorList", "titleList", "isbn", "reserved"})
+@XmlType(propOrder = { "id","authorList", "titleList", "isbn", "reserved", "rented"})
 
 public class Book implements Serializable {
-
+    int id;
     List<String> authorList;
     List<Pair> titleList;
     String isbn;
     boolean isReserved;
+    boolean isRented;
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @XmlElement(name = "author")
     public List<String> getAuthorList() {
@@ -51,15 +61,39 @@ public class Book implements Serializable {
         isReserved = reserved;
     }
 
+    public boolean isRented() {
+        return isRented;
+    }
+
+    public void setRented(boolean rented) {
+        isRented = rented;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
-                "authorList=" + authorList +
+                "id=" + id +
+                ", authorList=" + authorList +
                 ", titleList=" + titleList +
                 ", isbn='" + isbn + '\'' +
                 ", isReserved=" + isReserved +
+                ", isRented=" + isRented +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Book book = (Book) o;
+
+        return id == book.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

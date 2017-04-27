@@ -25,7 +25,9 @@ public class BookRepository implements BookRepositoryRemote {
 
     @Override
     public void rent(Book book) {
-
+        if(!book.isReserved()) {
+            IOUtils.setRent(book,true);
+        }
     }
 
     @Override
@@ -35,11 +37,17 @@ public class BookRepository implements BookRepositoryRemote {
 
     @Override
     public void returning(Book book) {
-
+        if(book.isRented()) {
+            IOUtils.setRent(book,false);
+        }
     }
 
     @Override
     public void persist(Book book) {
         IOUtils.addBook(book);
     }
+
+        public void removeBookstore() {
+            IOUtils.removeBooks();
+        }
 }

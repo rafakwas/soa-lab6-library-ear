@@ -11,4 +11,5 @@ public interface BookRepositoryRemote {
     void reserve(Book book);
     void returning(Book book);
     void persist(Book book);
+    void removeBookstore();
 }

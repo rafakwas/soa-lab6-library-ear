@@ -13,6 +13,7 @@ import java.util.List;
 
 public class IOUtils {
     private static final String BOOKSTORE_PATH = "bookstore.xml";
+    private static int counter;
 
     public static Bookstore getBookstore() {
         Bookstore bookstore = null;
@@ -33,9 +34,12 @@ public class IOUtils {
         Bookstore bookstore = getBookstore();
         if (bookstore == null) {
             bookstore = new Bookstore();
+        }
+        if (bookstore.getBookList() == null) {
             bookstore.setBookList(new ArrayList<Book>());
         }
         List<Book> bookList = bookstore.getBookList();
+        book.setId(counter++);
         bookList.add(book);
         bookstore.setBookList(bookList);
         write(BOOKSTORE_PATH,bookstore);
@@ -44,14 +48,32 @@ public class IOUtils {
     }
 
     public static void modifyReservation(Book book) {
+        System.out.println("modifyReservation");
+
         Bookstore bookstore = getBookstore();
         List<Book> bookList = bookstore.getBookList();
         bookList.remove(book);
-        if (book.isReserved()) book.setReserved(false); else book.setReserved(false);
+        if (book.isReserved()) book.setReserved(false); else book.setReserved(true);
         bookList.add(book);
         bookstore.setBookList(bookList);
         write(BOOKSTORE_PATH,bookstore);
     }
+
+
+    public static void setRent(Book book,boolean rent) {
+        Bookstore bookstore = getBookstore();
+        List<Book> bookList = bookstore.getBookList();
+        bookList.remove(book);
+        book.setRented(rent);
+        bookList.add(book);
+        bookstore.setBookList(bookList);
+        write(BOOKSTORE_PATH,bookstore);
+    }
+
+    public static void removeBooks() {
+        write(BOOKSTORE_PATH,new Bookstore());
+    }
+
 
     private static void write(final String BOOKSTORE_PATH,final Bookstore bookstore) {
 
